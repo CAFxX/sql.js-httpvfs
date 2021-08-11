@@ -32,7 +32,7 @@ suffixLength=$(( $suffixLength + 1 ))
 # https://nginx.org/en/docs/http/ngx_http_gzip_static_module.html#gzip_static
 # https://github.com/google/ngx_brotli#brotli_static
 split "$indb" --bytes=$serverChunkSize "$outdir/db.sqlite3." --suffix-length=$suffixLength --numeric-suffixes
-find "$outdir" -type f -regex 'db\.sqlite3\.[0-9]+$' | xargs -P$cpu -I{} sh -c 'f={}; gzip --keep --best "$f"; brotli --keep --best "$f"'
+find "$outdir" -type f -regex 'db\.sqlite3\.[0-9]+$' | xargs -P$cpu -I{} sh -c 'f="{}"; gzip --keep --best "$f"; brotli --keep --best "$f"'
 
 
 # write a json config
